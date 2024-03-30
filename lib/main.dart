@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:tp/tp6.dart';
+import 'package:tp/tp7.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: Tp6(),
+    home: Tp7(),
     debugShowCheckedModeBanner: false,
   ));
 }
