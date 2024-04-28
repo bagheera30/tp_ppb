@@ -58,5 +58,33 @@ class _Tp8State extends State<Tp8> {
 
   Widget _buildLoading() {
     return const Center(child: CircularProgressIndicator());
+
+    body:
+    SafeArea(
+      child: FutureBuilder<List<CameraDescription>>(
+        future: _cameras,
+        builder: (BuildContext context,
+            AsyncSnapshot<List<CameraDescription>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: const Icon(Icons.camera),
+                  title: Text('Camera ${index + 1}'),
+                  subtitle: Text(
+                      'Sensor Orientation: ${snapshot.data![index].sensorOrientation}'),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
   }
 }
