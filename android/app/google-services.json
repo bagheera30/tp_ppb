@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "509755491476",
+    "firebase_url": "https://tp-ppb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tp-ppb",
+    "storage_bucket": "tp-ppb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509755491476:android:03c0a5e8c268998046e081",
+        "android_client_info": {
+          "package_name": "com.example.tp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAwaddmLaBdSa4guUx7htFa5bMZ5CLUn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
