@@ -11,6 +11,7 @@ untuk awal kita menginstall semua depedensi di flutter dengan command berikut
 ```
 
 setalah itu baru menjalankan flutternya dengan klik debuger atau dengan menekan f5
+### mohon ini bukan bahan contek atau kesamaan dalam code bukan tanggung jawab autor
 
 ## Authors
 
