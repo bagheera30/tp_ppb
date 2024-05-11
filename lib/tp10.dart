@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:tp/db/database.dart';
 import 'package:tp/model/user.dart';
 
-class Tp10 extends StatefulWidget {
-  const Tp10({super.key});
+class Tugas extends StatefulWidget {
+  const Tugas({super.key});
 
   @override
-  State<Tp10> createState() => _Tp10State();
+  State<Tugas> createState() => _TugasState();
 }
 
-class _Tp10State extends State<Tp10> {
+class _TugasState extends State<Tugas> {
   final TextEditingController _namec = TextEditingController();
   List<User> users = [];
   final db = DatabaseHelper();
@@ -32,6 +32,37 @@ class _Tp10State extends State<Tp10> {
     await db.insertData(newUser);
     rf();
     _namec.text = '';
+  }
+
+  void edit(User user) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Edit Name'),
+        content: TextField(
+          controller: _namec,
+          decoration: InputDecoration(
+            labelText: 'Edit name',
+          ),
+        ),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Cancel')),
+          ElevatedButton(
+              onPressed: () async {
+                user.name = _namec.text;
+                await db.update(user);
+                rf();
+                _namec.text = '';
+                Navigator.pop(context);
+              },
+              child: Text('Save')),
+        ],
+      ),
+    );
   }
 
   void popup() {
@@ -87,17 +118,32 @@ class _Tp10State extends State<Tp10> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: CircleAvatar(
-                        child: Text(users[index].id.toString()),
-                        backgroundColor: Colors.blue,
+                        child: Text((index + 1).toString()),
+                        backgroundColor:
+                            index % 2 == 0 ? Colors.blue : Colors.green,
                         foregroundColor: Colors.white,
                         radius: 20,
                       ),
                       title: Text(users[index].name),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () async {
-                          await db.delete(users[index].id ?? 0);
-                        },
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () {
+                              _namec.text = users[index]
+                                  .name; // Set current name in text field
+                              edit(users[index]);
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () async {
+                              await db.delete(users[index].id ?? 0);
+                              rf();
+                            },
+                          ),
+                        ],
                       ),
                     );
                   },
