@@ -1,12 +1,16 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
 import 'package:http/http.dart' as http;
 
 class Tp12 extends StatefulWidget {
   const Tp12({super.key});
+
   @override
   State<Tp12> createState() => _Tp12State();
 }
+
 class _Tp12State extends State<Tp12> {
   final TextEditingController _namec = TextEditingController();
   final TextEditingController _categoryc = TextEditingController();
@@ -17,6 +21,7 @@ class _Tp12State extends State<Tp12> {
     super.initState();
     rf();
   }
+
   Future<void> delete(String id) async {
     String url = "http://10.0.2.2/api/delete.php";
     print('test');
@@ -36,6 +41,7 @@ class _Tp12State extends State<Tp12> {
     }
     rf();
   }
+
   Future<void> rf() async {
     String url = "http://10.0.2.2/api/readData.php";
     try {
@@ -49,6 +55,7 @@ class _Tp12State extends State<Tp12> {
       );
     }
   }
+
   Future<void> add() async {
     if (_namec.text.isNotEmpty ||
         _categoryc.text.isNotEmpty ||
@@ -81,6 +88,7 @@ class _Tp12State extends State<Tp12> {
     _categoryc.text = '';
     _descriptionc.text = '';
   }
+
   void edit(String id, String name, String category, String description) async {
     showDialog(
       context: context,
